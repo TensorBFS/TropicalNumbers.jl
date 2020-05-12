@@ -1,5 +1,5 @@
 module TropicalNumbers
 
-greet() = print("Hello World!")
+include("base.jl")
 
 end # module
