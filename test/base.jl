@@ -13,4 +13,8 @@ using TropicalNumbers
     @test TropicalF32(2.0).n isa Float32
     @test TropicalF16(2.0).n isa Float16
     @test TropicalF64(2.0).n isa Float64
+
+    @test Tropical(0//3) * Tropical(1//3) == Tropical(1//3)
+    @test Tropical(1//3) * Tropical(0//3) == Tropical(1//3)
+    @test Tropical(1//3) * Tropical(1//3) == Tropical(2//3)
 end

@@ -28,9 +28,9 @@ value(x::Tropical) = x.n
 Base.:*(a::Tropical, b::Tropical) = Tropical(a.n + b.n)
 function Base.:*(a::Tropical{<:Rational}, b::Tropical{<:Rational})
     if a == zero(a)
-        a
-    elseif b == zero(b)
         b
+    elseif b == zero(b)
+        a
     else
         Tropical(a.n + b.n)
     end
