@@ -17,4 +17,9 @@ using TropicalNumbers
     @test Tropical(0//3) * Tropical(1//3) == Tropical(1//3)
     @test Tropical(1//3) * Tropical(0//3) == Tropical(1//3)
     @test Tropical(1//3) * Tropical(1//3) == Tropical(2//3)
+
+    @test Tropical(1//3) * Tropical(1//0) == Tropical(1//0)
+    @test Tropical(1//3) * Tropical(-1//0) == Tropical(-1//0)
+    @test Tropical(1//0) * Tropical(1//1) == Tropical(1//0)
+    @test Tropical(-1//0) * Tropical(-1//1) == Tropical(-1//0)
 end

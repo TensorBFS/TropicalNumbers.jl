@@ -27,17 +27,18 @@ value(x::Tropical) = x.n
 
 Base.:*(a::Tropical, b::Tropical) = Tropical(a.n + b.n)
 function Base.:*(a::Tropical{<:Rational}, b::Tropical{<:Rational})
-    if a == zero(a)
-        b
-    elseif b == zero(b)
+    if a.n.den == 0
         a
+    elseif b.n.den == 0
+        b
     else
         Tropical(a.n + b.n)
     end
 end
 Base.:+(a::Tropical, b::Tropical) = Tropical(max(a.n, b.n))
 Base.zero(::Type{Tropical{T}}) where T<:Integer = Tropical(typemin(T)÷T(2))
-Base.zero(::Type{Tropical{T}}) where T<:AbstractFloat = Tropical(typemin(T)/T(2))
+Base.zero(::Type{Tropical{T}}) where T<:AbstractFloat = Tropical(typemin(T))
+Base.zero(::Type{Tropical{T}}) where T<:Rational = Tropical(typemin(T))
 Base.zero(::Tropical{T}) where T = zero(Tropical{T})
 
 Base.one(::Type{Tropical{T}}) where T = Tropical(zero(T))
