@@ -1,4 +1,4 @@
-export Tropical, TropicalF64, TropicalF32, TropicalF16
+export Tropical, TropicalF64, TropicalF32, TropicalF16, content
 
 struct Tropical{T} <: Number
     n::T
@@ -23,7 +23,7 @@ function Base.show(io::IO, ::MIME"text/plain", inf::Tropical)
     Base.show(io, inf)
 end
 
-value(x::Tropical) = x.n
+content(x::Tropical) = x.n
 
 Base.:*(a::Tropical, b::Tropical) = Tropical(a.n + b.n)
 function Base.:*(a::Tropical{<:Rational}, b::Tropical{<:Rational})

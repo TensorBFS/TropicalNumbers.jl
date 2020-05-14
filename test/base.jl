@@ -22,4 +22,5 @@ using TropicalNumbers
     @test Tropical(1//3) * Tropical(-1//0) == Tropical(-1//0)
     @test Tropical(1//0) * Tropical(1//1) == Tropical(1//0)
     @test Tropical(-1//0) * Tropical(-1//1) == Tropical(-1//0)
+    @test content(Tropical(3.0)) == 3.0
 end
