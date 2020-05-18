@@ -1,5 +1,9 @@
 export Tropical, TropicalF64, TropicalF32, TropicalF16, content
 
+neginf(::Type{T}) where T<:AbstractFloat = typemin(T)
+neginf(::Type{T}) where T<:Rational = typemin(T)
+neginf(::Type{T}) where T<:Integer = T(-999999)
+
 struct Tropical{T} <: Number
     n::T
     Tropical{T}(x) where T = new{T}(T(x))
@@ -36,9 +40,7 @@ function Base.:*(a::Tropical{<:Rational}, b::Tropical{<:Rational})
     end
 end
 Base.:+(a::Tropical, b::Tropical) = Tropical(max(a.n, b.n))
-Base.zero(::Type{Tropical{T}}) where T<:Integer = Tropical(typemin(T)÷T(2))
-Base.zero(::Type{Tropical{T}}) where T<:AbstractFloat = Tropical(typemin(T))
-Base.zero(::Type{Tropical{T}}) where T<:Rational = Tropical(typemin(T))
+Base.zero(::Type{Tropical{T}}) where T = Tropical(neginf(T))
 Base.zero(::Tropical{T}) where T = zero(Tropical{T})
 
 Base.one(::Type{Tropical{T}}) where T = Tropical(zero(T))
