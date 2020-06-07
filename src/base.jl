@@ -3,6 +3,7 @@ export Tropical, TropicalF64, TropicalF32, TropicalF16, content
 neginf(::Type{T}) where T<:AbstractFloat = typemin(T)
 neginf(::Type{T}) where T<:Rational = typemin(T)
 neginf(::Type{T}) where T<:Integer = T(-999999)
+neginf(::Type{T}) where T<:Int16 = T(-9999)
 
 struct Tropical{T} <: Number
     n::T
