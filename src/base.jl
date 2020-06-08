@@ -1,8 +1,11 @@
 export Tropical, TropicalF64, TropicalF32, TropicalF16, content
 
+neginf(::Type{T}) where T = typemin(T)
 neginf(::Type{T}) where T<:AbstractFloat = typemin(T)
 neginf(::Type{T}) where T<:Rational = typemin(T)
 neginf(::Type{T}) where T<:Integer = T(-999999)
+neginf(::Type{Int16}) = Int16(-16384)
+neginf(::Type{Int8}) = Int8(-64)
 
 struct Tropical{T} <: Number
     n::T
@@ -12,6 +15,9 @@ struct Tropical{T} <: Number
     end
     function Tropical{T}(x::Tropical{T}) where T
         x
+    end
+    function Tropical{T1}(x::Tropical{T2}) where {T1,T2}
+        new{T1}(T2(x.n))
     end
 end
 
