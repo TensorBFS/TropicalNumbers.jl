@@ -2,8 +2,8 @@
 
 Tropical number algebra, still under development.
 
-[![Build Status](https://travis-ci.com/TensorBFS/TropicalNumbers.jl.svg?branch=master)](https://travis-ci.com/GiggleLiu/TropicalNumbers.jl)
-[![Codecov](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/GiggleLiu/TropicalNumbers.jl)
+[![Build Status](https://travis-ci.com/TensorBFS/TropicalNumbers.jl.svg?branch=master)](https://travis-ci.com/TensorBFS/TropicalNumbers.jl)
+[![Codecov](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl)
 
 ## To start
 
