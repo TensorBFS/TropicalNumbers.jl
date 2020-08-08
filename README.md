@@ -8,7 +8,7 @@ Tropical number algebra, still under development.
 ## To start
 
 ```julia
-pkg add git@github.com:GiggleLiu/TropicalNumbers.jl.git#master
+pkg> add TropicalNumbers
 ```
 
 ## Why another tropical number?
