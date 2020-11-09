@@ -25,6 +25,7 @@ Base.one(::Type{CountingTropical{T}}) where T<:Integer = CountingTropical(zero(T
 Base.one(::Type{CountingTropical{T}}) where T<:AbstractFloat = CountingTropical(zero(T), T(1))
 Base.one(x::T) where T<:CountingTropical = one(T)
 Base.zero(x::T) where T<:CountingTropical = zero(T)
+Base.isapprox(a::CountingTropical, b::CountingTropical; kwargs...) = isapprox(a.n, b.n; kwargs...) && isapprox(a.c, b.c; kwargs...)
 
 TropicalNumbers.content(x::CountingTropical) = x.n
 TropicalTypes{T} = Union{CountingTropical{T}, Tropical{T}}
