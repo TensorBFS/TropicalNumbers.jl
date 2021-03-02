@@ -25,13 +25,8 @@ const TropicalF64 = Tropical{Float64}
 const TropicalF32 = Tropical{Float32}
 const TropicalF16 = Tropical{Float16}
 
-function Base.show(io::IO, inf::Tropical)
-    print(io,"Tropical($(inf.n))")
-end
-
-function Base.show(io::IO, ::MIME"text/plain", inf::Tropical)
-    Base.show(io, inf)
-end
+Base.show(io::IO, t::Tropical) = Base.print(io, "$(t.n)ₜ")
+Base.show(io::IO, ::MIME"text/plain", t::Tropical) = Base.show(io, t)
 
 content(x::Tropical) = x.n
 

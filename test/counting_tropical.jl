@@ -15,4 +15,5 @@ using TropicalNumbers
     @test res2.n == 4
     @test res2.c == 12
     @test res2 ≈ CountingTropical(4, 12)
+    println(CountingTropical{Float64}(3))
 end

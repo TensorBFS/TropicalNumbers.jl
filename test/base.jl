@@ -24,4 +24,5 @@ using TropicalNumbers
     @test Tropical(-1//0) * Tropical(-1//1) == Tropical(-1//0)
     @test content(Tropical(3.0)) == 3.0
     @test Tropical{Float32}(Tropical(0.0)) isa Tropical{Float32}
+    println(TropicalF64(3))
 end

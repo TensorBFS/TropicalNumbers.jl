@@ -29,3 +29,6 @@ Base.isapprox(a::CountingTropical, b::CountingTropical; kwargs...) = isapprox(a.
 
 TropicalNumbers.content(x::CountingTropical) = x.n
 TropicalTypes{T} = Union{CountingTropical{T}, Tropical{T}}
+
+Base.show(io::IO, t::CountingTropical) = Base.print(io, "$((t.n, t.c))ₜ")
+Base.show(io::IO, ::MIME"text/plain", t::CountingTropical) = Base.show(io, t)
