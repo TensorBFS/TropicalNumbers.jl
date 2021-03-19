@@ -21,14 +21,7 @@ struct Tropical{T} <: Number
     end
 end
 
-const TropicalF64 = Tropical{Float64}
-const TropicalF32 = Tropical{Float32}
-const TropicalF16 = Tropical{Float16}
-
 Base.show(io::IO, t::Tropical) = Base.print(io, "$(t.n)ₜ")
-Base.show(io::IO, ::MIME"text/plain", t::Tropical) = Base.show(io, t)
-
-content(x::Tropical) = x.n
 
 Base.:*(a::Tropical, b::Tropical) = Tropical(a.n + b.n)
 function Base.:*(a::Tropical{<:Rational}, b::Tropical{<:Rational})
@@ -47,9 +40,4 @@ Base.zero(::Tropical{T}) where T = zero(Tropical{T})
 Base.one(::Type{Tropical{T}}) where T = Tropical(zero(T))
 Base.one(::Tropical{T}) where T = one(Tropical{T})
 
-for OP in [:>, :<, :(==), :>=, :<=, :isless]
-    @eval Base.$OP(a::Tropical, b::Tropical) = $OP(a.n, b.n)
-end
-
 Base.isapprox(x::Tropical, y::Tropical; kwargs...) = isapprox(x.n, y.n; kwargs...)
-Base.isapprox(x::AbstractArray{<:Tropical}, y::AbstractArray{<:Tropical}; kwargs...) = all(isapprox.(x, y; kwargs...))

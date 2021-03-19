@@ -1,8 +1,8 @@
 using TropicalNumbers
 using Test
 
-@testset "base" begin
-    include("base.jl")
+@testset "tropical" begin
+    include("tropical.jl")
 end
 
 @testset "counting_tropical" begin

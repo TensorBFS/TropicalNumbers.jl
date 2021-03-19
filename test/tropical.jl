@@ -25,4 +25,10 @@ using TropicalNumbers
     @test content(Tropical(3.0)) == 3.0
     @test Tropical{Float32}(Tropical(0.0)) isa Tropical{Float32}
     println(TropicalF64(3))
+
+    # promote and convert
+    t1 = Tropical(2)
+    t2 = Tropical(2.0)
+    @test TropicalF64(t1) === Tropical(2.0)
+    @test promote(t1, t2) === (Tropical(2.0), t2)
 end
