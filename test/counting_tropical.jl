@@ -16,4 +16,9 @@ using TropicalNumbers
     @test res2.c == 12
     @test res2 ≈ CountingTropical(4, 12)
     println(CountingTropical{Float64}(3))
+
+    ct1 = CountingTropical(2, 4)
+    ct2 = CountingTropical(2.0, 3.0)
+    @test CountingTropicalF64(ct1) === CountingTropical(2.0, 4.0)
+    @test promote(ct1, ct2) === (CountingTropical(2.0, 4.0), ct2)
 end
