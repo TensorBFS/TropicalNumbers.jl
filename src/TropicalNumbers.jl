@@ -20,11 +20,12 @@ for T in [:Tropical, :CountingTropical]
     end
     @eval begin
         # promotion rules
-        Base.promote_rule(::Type{$T{T1}}, b::Type{$T{T2}}) where {T1, T2} = $T{promote_rule(T1, T2)}
-        Base.promote_rule(::Type{$T{T1}}, b::Type{$T{Union{}}}) where {T1} = $T{T1}
-        Base.promote_rule(::Type{$T{Union{}}}, b::Type{$T{T2}}) where {T2} = $T{T2}
+        @inline _create_type(::Type{$T}, ::Type{IT}) where {IT} = $T{IT}
+        @inline _create_type(::Type{$T}, ::Type{Union{}}) where {IT} = Union{}
+        Base.promote_rule(::Type{$T{T1}}, b::Type{$T{T2}}) where {T1, T2} = _create_type($T, promote_rule(T1,T2))
 
         content(x::$T) = x.n
+        content(x::Type{$T{X}}) where X = X
         Base.isapprox(x::AbstractArray{<:$T}, y::AbstractArray{<:$T}; kwargs...) = all(isapprox.(x, y; kwargs...))
         Base.show(io::IO, ::MIME"text/plain", t::$T) = Base.show(io, t)
 

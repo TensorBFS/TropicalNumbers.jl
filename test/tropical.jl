@@ -31,4 +31,6 @@ using TropicalNumbers
     t2 = Tropical(2.0)
     @test TropicalF64(t1) === Tropical(2.0)
     @test promote(t1, t2) === (Tropical(2.0), t2)
+
+    @test content(TropicalF64) == Float64
 end
