@@ -36,4 +36,6 @@ using TropicalNumbers
 
     @test promote(Tropical{Float64}(1), Tropical{Int64}(2)) == (Tropical{Float64}(1), Tropical{Float64}(2))
     @test promote(Tropical{Float64}(1)) == (Tropical{Float64}(1),)
+    @test promote_type(Tropical{Float64}, TropicalF32) == TropicalF64
+    @test promote_type(Tropical{Float64}, TropicalF32, Tropical{Int32}) == TropicalF64
 end
