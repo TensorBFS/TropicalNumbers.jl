@@ -41,3 +41,6 @@ Base.one(::Type{Tropical{T}}) where T = Tropical(zero(T))
 Base.one(::Tropical{T}) where T = one(Tropical{T})
 
 Base.isapprox(x::Tropical, y::Tropical; kwargs...) = isapprox(x.n, y.n; kwargs...)
+
+# promotion rules
+Base.promote_type(::Type{Tropical{T1}}, b::Type{Tropical{T2}}) where {T1, T2} = Tropical{promote_type(T1,T2)}
