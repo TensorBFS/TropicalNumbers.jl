@@ -33,4 +33,7 @@ using TropicalNumbers
     @test promote(t1, t2) === (Tropical(2.0), t2)
 
     @test content(TropicalF64) == Float64
+
+    @test promote(Tropical{Float64}(1), Tropical{Int64}(2)) == (Tropical{Float64}(1), Tropical{Float64}(2))
+    @test promote(Tropical{Float64}(1)) == (Tropical{Float64}(1),)
 end
