@@ -43,6 +43,4 @@ Base.one(::Tropical{T}) where T = one(Tropical{T})
 Base.isapprox(x::Tropical, y::Tropical; kwargs...) = isapprox(x.n, y.n; kwargs...)
 
 # promotion rules
-@inline _create_type(::Type{Tropical}, ::Type{IT}) where {IT} = Tropical{IT}
-@inline _create_type(::Type{Tropical}, ::Type{Union{}}) = Union{}
-Base.promote_rule(::Type{Tropical{T1}}, b::Type{Tropical{T2}}) where {T1, T2} = _create_type(Tropical, promote_rule(T1,T2))
+Base.promote_type(::Type{Tropical{T1}}, b::Type{Tropical{T2}}) where {T1, T2} = Tropical{promote_type(T1,T2)}
