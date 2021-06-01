@@ -32,4 +32,6 @@ using TropicalNumbers
     @test promote(CountingTropical{Float64,Float32}(1, 2), CountingTropical{Int64,Int32}(1, 2)) == (CountingTropical{Float64,Float32}(1, 2), CountingTropical{Float64,Float32}(1, 2))
     @test promote(CountingTropical{Float64,Float32}(1, 2)) == (CountingTropical{Float64,Float32}(1, 2),)
     @test promote_type(CountingTropical{Float64,Float32}, CountingTropicalF32, CountingTropical{Int32,Int32}) == CountingTropical{Float64,Float32}
+
+    @test one(CountingTropical{Float64}) == one(CountingTropicalF64)
 end
