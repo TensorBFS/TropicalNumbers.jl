@@ -1,23 +1,25 @@
 module TropicalNumbers
 
 export Tropical, TropicalF64, TropicalF32, TropicalF16, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64, content
-export CountingTropical
+export CountingTropical, ConfigTropical
 export TropicalTypes
 
 
 include("tropical.jl")
 include("counting_tropical.jl")
+include("config_tropical.jl")
 
-const TropicalTypes{T} = Union{CountingTropical{T}, Tropical{T}}
+const TropicalTypes{T} = Union{CountingTropical{T}, ConfigTropical{T}, Tropical{T}}
 
 # alias
 for NBIT in [16, 32, 64]
     @eval const $(Symbol(:Tropical, :F, NBIT)) = Tropical{$(Symbol(:Float, NBIT))}
     @eval const $(Symbol(:CountingTropical, :F, NBIT)) = CountingTropical{$(Symbol(:Float, NBIT)),$(Symbol(:Float, NBIT))}
+    @eval const $(Symbol(:ConfigTropical, :F, NBIT)){N,C} = ConfigTropical{$(Symbol(:Float, NBIT)),N,C}
 end
 
 # alias
-for T in [:Tropical, :CountingTropical]
+for T in [:Tropical, :CountingTropical, :ConfigTropical]
     # defining constants like `TropicalF64`.
     for OP in [:>, :<, :(==), :>=, :<=, :isless]
         @eval Base.$OP(a::$T, b::$T) = $OP(a.n, b.n)
