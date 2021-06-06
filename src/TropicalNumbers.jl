@@ -33,6 +33,10 @@ for T in [:Tropical, :CountingTropical, :ConfigTropical]
         # this is for CUDA matmul
         Base.:(*)(a::$T, b::Bool) = b ? a : zero(a)
         Base.:(*)(b::Bool, a::$T) = b ? a : zero(a)
+        Base.:(/)(a::$T, b::Bool) = b ? a : a / zero(a)
+        Base.:(/)(b::Bool, a::$T) = b ? inv(a) : zero(a)
+        Base.div(a::$T, b::Bool) = b ? a : a / zero(a)
+        Base.div(b::Bool, a::$T) = b ? inv(a) : zero(a)
     end
 end
 

@@ -40,6 +40,11 @@ Base.zero(::Tropical{T}) where T = zero(Tropical{T})
 Base.one(::Type{Tropical{T}}) where T = Tropical(zero(T))
 Base.one(::Tropical{T}) where T = one(Tropical{T})
 
+# inverse and division
+Base.inv(x::Tropical) = Tropical(-x.n)
+Base.:/(x::Tropical, y::Tropical) = Tropical(x.n - y.n)
+Base.div(x::Tropical, y::Tropical) = Tropical(x.n - y.n)
+
 Base.isapprox(x::Tropical, y::Tropical; kwargs...) = isapprox(x.n, y.n; kwargs...)
 
 # promotion rules

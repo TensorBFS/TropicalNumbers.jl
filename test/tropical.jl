@@ -38,4 +38,22 @@ using TropicalNumbers
     @test promote(Tropical{Float64}(1)) == (Tropical{Float64}(1),)
     @test promote_type(Tropical{Float64}, TropicalF32) == TropicalF64
     @test promote_type(Tropical{Float64}, TropicalF32, Tropical{Int32}) == TropicalF64
+
+    @test Tropical(3) / Tropical(4) == Tropical(-1)
+    @test Tropical(3) ÷ Tropical(4) == Tropical(-1)
+    @test inv(Tropical(3)) == Tropical(-3)
+
+    x = Tropical(2.0)
+    @test x * true == x * one(x)
+    @test x / true == x / one(x)
+    @test x ÷ true == x ÷ one(x)
+    @test x * false == x * zero(x)
+    @test x / false == x / zero(x)
+    @test x ÷ false == x ÷ zero(x)
+    @test true * x == one(x) * x
+    @test true / x == one(x) / x
+    @test true ÷ x == one(x) ÷ x
+    @test false * x == zero(x) * x
+    @test false / x == zero(x) / x
+    @test false ÷ x == zero(x) ÷ x
 end
