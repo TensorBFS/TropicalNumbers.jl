@@ -22,6 +22,9 @@ function Base.:+(a::CountingTropical, b::CountingTropical)
     end
     CountingTropical(n, c)
 end
+# inverse and division
+Base.inv(x::CountingTropical) = CountingTropical(-x.n, x.c)
+
 Base.zero(::Type{CountingTropical{T}}) where T = zero(CountingTropical{T,T})
 Base.zero(::Type{CountingTropical{T,CT}}) where {T<:Integer,CT} = CountingTropical(T(-999999), zero(CT))
 Base.zero(::Type{CountingTropical{T,CT}}) where {T<:AbstractFloat,CT} = CountingTropical(typemin(T), zero(CT))

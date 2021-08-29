@@ -56,4 +56,6 @@ using TropicalNumbers
     @test false * x == zero(x) * x
     @test false / x == zero(x) / x
     @test false ÷ x == zero(x) ÷ x
+    @test isnan(Tropical(NaN))
+    @test !isnan(Tropical(-Inf))
 end

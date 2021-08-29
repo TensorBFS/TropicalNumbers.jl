@@ -1,25 +1,23 @@
 module TropicalNumbers
 
 export Tropical, TropicalF64, TropicalF32, TropicalF16, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64, content
-export CountingTropical, ConfigTropical
+export CountingTropical
 export TropicalTypes
 
 
 include("tropical.jl")
 include("counting_tropical.jl")
-include("config_tropical.jl")
 
-const TropicalTypes{T} = Union{CountingTropical{T}, ConfigTropical{T}, Tropical{T}}
+const TropicalTypes{T} = Union{CountingTropical{T}, Tropical{T}}
 
 # alias
 for NBIT in [16, 32, 64]
     @eval const $(Symbol(:Tropical, :F, NBIT)) = Tropical{$(Symbol(:Float, NBIT))}
     @eval const $(Symbol(:CountingTropical, :F, NBIT)) = CountingTropical{$(Symbol(:Float, NBIT)),$(Symbol(:Float, NBIT))}
-    @eval const $(Symbol(:ConfigTropical, :F, NBIT)){N,C} = ConfigTropical{$(Symbol(:Float, NBIT)),N,C}
 end
 
 # alias
-for T in [:Tropical, :CountingTropical, :ConfigTropical]
+for T in [:Tropical, :CountingTropical]
     # defining constants like `TropicalF64`.
     for OP in [:>, :<, :(==), :>=, :<=, :isless]
         @eval Base.$OP(a::$T, b::$T) = $OP(a.n, b.n)
@@ -29,6 +27,7 @@ for T in [:Tropical, :CountingTropical, :ConfigTropical]
         content(x::Type{$T{X}}) where X = X
         Base.isapprox(x::AbstractArray{<:$T}, y::AbstractArray{<:$T}; kwargs...) = all(isapprox.(x, y; kwargs...))
         Base.show(io::IO, ::MIME"text/plain", t::$T) = Base.show(io, t)
+        Base.isnan(x::$T) = isnan(content(x))
 
         # this is for CUDA matmul
         Base.:(*)(a::$T, b::Bool) = b ? a : zero(a)
