@@ -34,4 +34,6 @@ using TropicalNumbers
     @test promote_type(CountingTropical{Float64,Float32}, CountingTropicalF32, CountingTropical{Int32,Int32}) == CountingTropical{Float64,Float32}
 
     @test one(CountingTropical{Float64}) == one(CountingTropicalF64)
+    @test isnan(CountingTropical(NaN))
+    @test !isnan(CountingTropical(-Inf))
 end
