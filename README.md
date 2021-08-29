@@ -21,3 +21,6 @@ Related packages includes
 Tropical numbers in these packages contains an extra field `isinf`. Which is not nessesary because we have `Inf` and `-Inf` for floating point numbers already, we can just use them directly. It is memory more efficient and computational cheap.
 
 Most importantly, we are going to release a BLAS package for tropical numbers, which is two orders faster than naive Julia loops. If a tropical number is defined as a composite data structure, it is hard to utilize SIMD.
+
+## Ecosystem
+* [TropicalGEMM](https://github.com/TensorBFS/TropicalGEMM.jl), Tropical matrix multiplication with close to optimal speed.
