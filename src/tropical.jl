@@ -7,6 +7,18 @@ neginf(::Type{T}) where T<:Integer = T(-999999)
 neginf(::Type{Int16}) = Int16(-16384)
 neginf(::Type{Int8}) = Int8(-64)
 
+"""
+    Tropical{T} <: Number
+    
+[Tropical number](https://en.wikipedia.org/wiki/Tropical_geometry) is a semiring algebra that maps
+
+* `+` in regular algebra to `max`,
+* `*` in regular algebra to `+`,
+* `1` in regular algebra to `0`,
+* `0` in regular algebra to `-Inf` (for integer content types, this is chosen as a mall integer).
+
+We implemented fast tropical matrix multiplication in [`TropicalGEMM`](https://github.com/TensorBFS/TropicalGEMM.jl/).
+"""
 struct Tropical{T} <: Number
     n::T
     Tropical{T}(x) where T = new{T}(T(x))

@@ -1,3 +1,9 @@
+"""
+    CountingTropical{T,CT} <: Number
+
+Counting tropical number type is also a semiring algebra.
+It is tropical algebra with one extra field for counting, it is introduced in [arXiv:2008.06888](https://arxiv.org/abs/2008.06888).
+"""
 struct CountingTropical{T,CT} <: Number
     n::T
     c::CT
