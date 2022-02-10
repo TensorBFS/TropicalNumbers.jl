@@ -19,6 +19,8 @@ neginf(::Type{Int8}) = Int8(-64)
 
 We implemented fast tropical matrix multiplication in [`TropicalGEMM`](https://github.com/TensorBFS/TropicalGEMM.jl/).
 
+Example
+-------------------------
 ```jldoctest; setup=:(using TropicalNumbers)
 julia> Tropical(1.0) + Tropical(3.0)
 3.0ₜ
