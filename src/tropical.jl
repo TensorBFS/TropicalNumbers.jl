@@ -18,6 +18,20 @@ neginf(::Type{Int8}) = Int8(-64)
 * `0` in regular algebra to `-Inf` (for integer content types, this is chosen as a mall integer).
 
 We implemented fast tropical matrix multiplication in [`TropicalGEMM`](https://github.com/TensorBFS/TropicalGEMM.jl/).
+
+```jldoctest; setup=:(using TropicalNumbers)
+julia> Tropical(1.0) + Tropical(3.0)
+3.0ₜ
+
+julia> Tropical(1.0) * Tropical(3.0)
+4.0ₜ
+
+julia> one(TropicalF64)
+0.0ₜ
+
+julia> zero(TropicalF64)
+-Infₜ
+```
 """
 struct Tropical{T} <: Number
     n::T
