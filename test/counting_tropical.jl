@@ -36,4 +36,6 @@ using TropicalNumbers
     @test one(CountingTropical{Float64}) == one(CountingTropicalF64)
     @test isnan(CountingTropical(NaN))
     @test !isnan(CountingTropical(-Inf))
+
+    @test CountingTropical(2.0, 3.0) ^ 3.0 == CountingTropical(2.0, 3.0) * CountingTropical(2.0, 3.0) * CountingTropical(2.0, 3.0)
 end

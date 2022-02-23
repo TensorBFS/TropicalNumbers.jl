@@ -33,6 +33,7 @@ CountingTropical{T1,CT1}(x::CountingTropical) where {T1,CT1} = CountingTropical(
 CountingTropical{T1,CT1}(x::Tropical) where {T1,CT1} = CountingTropical{T1,CT1}(T1(TropicalNumbers.content(x)), one(CT1))
 
 Base.:*(a::CountingTropical, b::CountingTropical) = CountingTropical(a.n + b.n, a.c * b.c)
+Base.:^(a::CountingTropical, b::Real) = CountingTropical(a.n * b, a.c ^ b)
 function Base.:+(a::CountingTropical, b::CountingTropical)
     n = max(a.n, b.n)
     if a.n > b.n
