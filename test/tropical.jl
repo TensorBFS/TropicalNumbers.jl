@@ -58,4 +58,6 @@ using TropicalNumbers
     @test false ÷ x == zero(x) ÷ x
     @test isnan(Tropical(NaN))
     @test !isnan(Tropical(-Inf))
+
+    @test Tropical(2.0) ^ 3.0 == Tropical(2.0) * Tropical(2.0) * Tropical(2.0)
 end

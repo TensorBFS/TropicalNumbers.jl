@@ -51,6 +51,7 @@ end
 
 Base.show(io::IO, t::Tropical) = Base.print(io, "$(t.n)ₜ")
 
+Base.:^(a::Tropical, b::Real) = Tropical(a.n * b)
 Base.:*(a::Tropical, b::Tropical) = Tropical(a.n + b.n)
 function Base.:*(a::Tropical{<:Rational}, b::Tropical{<:Rational})
     if a.n.den == 0
