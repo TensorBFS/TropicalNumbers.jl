@@ -38,4 +38,5 @@ using TropicalNumbers
     @test !isnan(CountingTropical(-Inf))
 
     @test CountingTropical(2.0, 3.0) ^ 3.0 == CountingTropical(2.0, 3.0) * CountingTropical(2.0, 3.0) * CountingTropical(2.0, 3.0)
+    @test CountingTropical(2.0, 3.0) ^ 3 == CountingTropical(2.0, 3.0) * CountingTropical(2.0, 3.0) * CountingTropical(2.0, 3.0)
 end
