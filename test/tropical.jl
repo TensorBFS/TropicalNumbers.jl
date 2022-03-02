@@ -60,4 +60,5 @@ using TropicalNumbers
     @test !isnan(Tropical(-Inf))
 
     @test Tropical(2.0) ^ 3.0 == Tropical(2.0) * Tropical(2.0) * Tropical(2.0)
+    @test Tropical(2.0) ^ 3 == Tropical(2.0) * Tropical(2.0) * Tropical(2.0)
 end
