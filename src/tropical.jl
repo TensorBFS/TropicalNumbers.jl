@@ -12,10 +12,10 @@ neginf(::Type{Int8}) = Int8(-64)
     
 [Tropical number](https://en.wikipedia.org/wiki/Tropical_geometry) is a semiring algebra that maps
 
-* `+` in regular algebra to `max`,
-* `*` in regular algebra to `+`,
-* `1` in regular algebra to `0`,
-* `0` in regular algebra to `-Inf` (for integer content types, this is chosen as a mall integer).
+* `+` to `max` in regular algebra,
+* `*` to `+` in regular algebra,
+* `1` to `0` in regular algebra,
+* `0` to `-Inf` in regular algebra (for integer content types, this is chosen as a mall integer).
 
 We implemented fast tropical matrix multiplication in [`TropicalGEMM`](https://github.com/TensorBFS/TropicalGEMM.jl/).
 
@@ -64,7 +64,8 @@ function Base.:*(a::Tropical{<:Rational}, b::Tropical{<:Rational})
     end
 end
 Base.:+(a::Tropical, b::Tropical) = Tropical(max(a.n, b.n))
-Base.zero(::Type{Tropical{T}}) where T = Tropical(neginf(T))
+Base.typemin(::Type{Tropical{T}}) where T = Tropical(typemin(T))
+Base.zero(::Type{Tropical{T}}) where T = typemin(Tropical{T})
 Base.zero(::Tropical{T}) where T = zero(Tropical{T})
 
 Base.one(::Type{Tropical{T}}) where T = Tropical(zero(T))

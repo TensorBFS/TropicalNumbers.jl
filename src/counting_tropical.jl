@@ -49,9 +49,10 @@ end
 # inverse and division
 Base.inv(x::CountingTropical) = CountingTropical(-x.n, x.c)
 
+Base.typemin(::Type{CountingTropical{T,CT}}) where {T<:AbstractFloat,CT} = CountingTropical(typemin(T), zero(CT))
 Base.zero(::Type{CountingTropical{T}}) where T = zero(CountingTropical{T,T})
 Base.zero(::Type{CountingTropical{T,CT}}) where {T<:Integer,CT} = CountingTropical(T(-999999), zero(CT))
-Base.zero(::Type{CountingTropical{T,CT}}) where {T<:AbstractFloat,CT} = CountingTropical(typemin(T), zero(CT))
+Base.zero(::Type{CountingTropical{T,CT}}) where {T<:AbstractFloat,CT} = typemin(CountingTropical{T, CT})
 Base.zero(::T) where T<:CountingTropical = zero(T)
 Base.one(::Type{CountingTropical{T}}) where T = one(CountingTropical{T,T})
 Base.one(::Type{CountingTropical{T,CT}}) where {T<:Integer,CT} = CountingTropical(zero(T), one(CT))
