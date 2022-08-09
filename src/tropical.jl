@@ -64,7 +64,7 @@ function Base.:*(a::Tropical{<:Rational}, b::Tropical{<:Rational})
     end
 end
 Base.:+(a::Tropical, b::Tropical) = Tropical(max(a.n, b.n))
-Base.typemin(::Type{Tropical{T}}) where T = Tropical(typemin(T))
+Base.typemin(::Type{Tropical{T}}) where T = Tropical(neginf(T))
 Base.zero(::Type{Tropical{T}}) where T = typemin(Tropical{T})
 Base.zero(::Tropical{T}) where T = zero(Tropical{T})
 
