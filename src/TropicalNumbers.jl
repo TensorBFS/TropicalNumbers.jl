@@ -1,11 +1,12 @@
 module TropicalNumbers
 
-export Tropical, TropicalF64, TropicalF32, TropicalF16, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64, content
+export Tropical, TropicalF64, TropicalF32, TropicalF16, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64, content, TropicalAndOr
 export CountingTropical
 export TropicalTypes
 
 
 include("tropical.jl")
+include("tropical_andor.jl")
 include("counting_tropical.jl")
 
 const TropicalTypes{T} = Union{CountingTropical{T}, Tropical{T}}

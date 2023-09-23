@@ -3,6 +3,7 @@ using Test, Documenter
 
 @testset "tropical" begin
     include("tropical.jl")
+    include("tropical_andor.jl")
 end
 
 @testset "counting_tropical" begin
