@@ -1,47 +1,55 @@
 # TropicalNumbers
 
-Tropical number algebra, still under development.
+This package implements [tropical numbers](https://en.wikipedia.org/wiki/Tropical_geometry) and tropical algebras in Julia. Tropical algebra is also known as the [semiring](https://en.wikipedia.org/wiki/Semiring) algebra, which is a set $R$ equipped with two binary operations $\oplus$ and $\otimes$, called addition and multiplication, such that:
+
+* $(R, \oplus)$ is a monoid with identity element called $\mathbb{0}$;
+* $(R, \otimes)$ is a monoid with identity element called $\mathbb{1}$;
+* Addition is commutative;
+* Multiplication by the additive identity $\mathbb{0}$ annihilates ;
+* Multiplication left- and right-distributes over addition;
+* Explicitly stated, $(R, \oplus)$ is a commutative monoid.
+
 
 [![Build Status](https://travis-ci.com/TensorBFS/TropicalNumbers.jl.svg?branch=master)](https://travis-ci.com/TensorBFS/TropicalNumbers.jl)
 [![Codecov](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl)
 
-## To start
+## Installation
+To install this package, press `]` in Julia REPL to enter package mode, then type
 
 ```julia
 pkg> add TropicalNumbers
 ```
 
-## Semiring and Tropical Algebras
+## Using
 
-A [`Semiring`](https://en.wikipedia.org/wiki/Semiring) is a set R equipped with two binary operations + and ⋅, called addition and multiplication, such that:
+A Topical algebra can be described as a tuple $(R, \oplus, \otimes, \mathbb{0}, \mathbb{1})$, where $R$ is the set, $\oplus$ and $\otimes$ are the opeartions and $\mathbb{0}$, $\mathbb{1}$ are their identity element, respectively. In this package, the following tropical algebras are implemented:
+* `TropicalAndOr`: $([T, F], \lor, \land, F, T)$;
+* `Tropical` (`TropicalMaxPlus`): $(\mathbb{R}, \max, +, -\infty, 0)$;
+* `TropicalMinPlus`: $(\mathbb{R}, \min, +, \infty, 0)$;
+* `TropicalMaxMul`: $(\mathbb{R}^+, \max, \times, 0, 1)$.
 
-* (R, +) is a monoid with identity element called 0;
-* (R, ⋅) is a monoid with identity element called 1;
-* Addition is commutative;
-* Multiplication by the additive identity 0 annihilates ;
-* Multiplication left- and right-distributes over addition;
-* Explicitly stated, (R, +) is a commutative monoid.
+```julia
+julia> using TropicalNumbers
 
-[`Tropical number`](https://en.wikipedia.org/wiki/Tropical_geometry) are a set of semiring algebras, described as 
-* (R, +, ⋅, 0, 1).
-where R is the set, + and ⋅ are the opeartions and 0, 1 are their identity element, respectively.
+julia> Tropical(3) * Tropical(4)
+Tropical(7)
 
-In this package, the following tropical algebras are implemented:
-* TropicalAndOr, ([T, F], or, and, false, true);
-* Tropical (TropicalMaxPlus), (ℝ, max, +, -Inf, 0);
-* TropicalMinPlus, (ℝ, min, +, Inf, 0);
-* TropicalMaxMul, (ℝ⁺, max, ⋅, 0, 1).
+julia> TropicalMaxMul(3) * TropicalMaxMul(4)
+TropicalMaxMul(12)
+```
+!!! note
+    1. `TropicalMaxPlus` is an alias of `Tropical`.
+    2. `TropicalMaxMul` should not contain negative numbers. However, this package does not check the data validity. Not only for performance reason, but also for future GPU support.
 
 ## Why another tropical number?
 
-Related packages includes
+Related packages include
 
 * [SimpleTropical.jl](https://github.com/scheinerman/SimpleTropical.jl)
 * [TropicalSemiring.jl](https://github.com/saschatimme/TropicalSemiring.jl)
 
-Tropical numbers in these packages contains an extra field `isinf`. Which is not nessesary because we have `Inf` and `-Inf` for floating point numbers already, we can just use them directly. It is memory more efficient and computational cheap.
-
-Most importantly, we are going to release a BLAS package for tropical numbers, which is two orders faster than naive Julia loops. If a tropical number is defined as a composite data structure, it is hard to utilize SIMD.
+These packages include unnecessary fields in its tropical numbers, such as `isinf`. However, `Inf` and `-Inf` can be used directly for floating point numbers, which is more memory efficient and computationally cheap. `TropicalNumbers` is designed for high performance matrix multiplication on both CPU and GPU.
 
 ## Ecosystem
-* [TropicalGEMM](https://github.com/TensorBFS/TropicalGEMM.jl), Tropical matrix multiplication with close to optimal speed.
+* [TropicalGEMM](https://github.com/TensorBFS/TropicalGEMM.jl): The BLAS package for tropical numbers.
+* [CuTropicalGEMM](https://github.com/ArrogantGao/CuTropicalGEMM.jl), The GPU version of TropicalGEMM.
