@@ -2,6 +2,10 @@ using Test
 using TropicalNumbers
 
 @testset "tropical" begin
+    @test Tropical == TropicalMaxPlus
+    @test TropicalF16 == TropicalMaxPlusF16
+    @test TropicalF32 == TropicalMaxPlusF32
+    @test TropicalF64 == TropicalMaxPlusF64
     @test Tropical(3) * Tropical(4) == Tropical(7)
     @test Tropical(3) + Tropical(4) == Tropical(4)
     @test Tropical(4) + Tropical(-1) == Tropical(4)
