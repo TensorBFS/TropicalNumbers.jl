@@ -1,64 +1,63 @@
 using Test
 using TropicalNumbers
 
-@testset "tropical" begin
-    @test Tropical(3) * Tropical(4) == Tropical(7)
-    @test Tropical(3) + Tropical(4) == Tropical(4)
-    @test Tropical(4) + Tropical(-1) == Tropical(4)
-    @test zero(Tropical(2)).n .< -99999
-    @test zero(Tropical(2.0)) == Tropical(-Inf)
-    @test one(Tropical(2)) == Tropical(0)
-    @test Tropical(2.0) ≈ Tropical(2.0 + 1e-10)
-    @test Tropical(2) ≈ Tropical(2.0)
-    @test TropicalF32(2.0).n isa Float32
-    @test TropicalF16(2.0).n isa Float16
-    @test TropicalF64(2.0).n isa Float64
+@testset "TropicalMaxMul max mul" begin
+    @test TropicalMaxMul(3) * TropicalMaxMul(4) == TropicalMaxMul(12)
+    @test TropicalMaxMul(3) + TropicalMaxMul(4) == TropicalMaxMul(4)
+    @test TropicalMaxMul(4) + TropicalMaxMul(1) == TropicalMaxMul(4)
+    @test zero(TropicalMaxMul(2)).n == 0
+    @test zero(TropicalMaxMul(2.0)) == TropicalMaxMul(0.0)
+    @test one(TropicalMaxMul(2)) == TropicalMaxMul(1)
+    @test TropicalMaxMul(2.0) ≈ TropicalMaxMul(2.0 + 1e-10)
+    @test TropicalMaxMul(2) ≈ TropicalMaxMul(2.0)
+    @test TropicalMaxMulF32(2.0).n isa Float32
+    @test TropicalMaxMulF16(2.0).n isa Float16
+    @test TropicalMaxMulF64(2.0).n isa Float64
 
-    @test Tropical(0//3) * Tropical(1//3) == Tropical(1//3)
-    @test Tropical(1//3) * Tropical(0//3) == Tropical(1//3)
-    @test Tropical(1//3) * Tropical(1//3) == Tropical(2//3)
+    @test TropicalMaxMul(0//3) * TropicalMaxMul(1//3) == TropicalMaxMul(0//9)
+    @test TropicalMaxMul(1//3) * TropicalMaxMul(0//3) == TropicalMaxMul(0//9)
+    @test TropicalMaxMul(1//3) * TropicalMaxMul(1//3) == TropicalMaxMul(1//9)
 
-    @test Tropical(1//3) * Tropical(1//0) == Tropical(1//0)
-    @test Tropical(1//3) * Tropical(-1//0) == Tropical(-1//0)
-    @test Tropical(1//0) * Tropical(1//1) == Tropical(1//0)
-    @test Tropical(-1//0) * Tropical(-1//1) == Tropical(-1//0)
-    @test content(Tropical(3.0)) == 3.0
-    @test Tropical{Float32}(Tropical(0.0)) isa Tropical{Float32}
-    println(TropicalF64(3))
+    @test TropicalMaxMul(1//3) * TropicalMaxMul(1//0) == TropicalMaxMul(1//0)
+    @test TropicalMaxMul(1//0) * TropicalMaxMul(1//1) == TropicalMaxMul(1//0)
+    @test content(TropicalMaxMul(3.0)) == 3.0
+    @test TropicalMaxMul{Float32}(TropicalMaxMul(0.0)) isa TropicalMaxMul{Float32}
+    println(TropicalMaxMulF64(3))
 
     # promote and convert
-    t1 = Tropical(2)
-    t2 = Tropical(2.0)
-    @test TropicalF64(t1) === Tropical(2.0)
-    @test promote(t1, t2) === (Tropical(2.0), t2)
+    t1 = TropicalMaxMul(2)
+    t2 = TropicalMaxMul(2.0)
+    @test TropicalMaxMulF64(t1) === TropicalMaxMul(2.0)
+    @test promote(t1, t2) === (TropicalMaxMul(2.0), t2)
 
-    @test content(TropicalF64) == Float64
+    @test content(TropicalMaxMulF64) == Float64
 
-    @test promote(Tropical{Float64}(1), Tropical{Int64}(2)) == (Tropical{Float64}(1), Tropical{Float64}(2))
-    @test promote(Tropical{Float64}(1)) == (Tropical{Float64}(1),)
-    @test promote_type(Tropical{Float64}, TropicalF32) == TropicalF64
-    @test promote_type(Tropical{Float64}, TropicalF32, Tropical{Int32}) == TropicalF64
+    @test promote(TropicalMaxMul{Float64}(1), TropicalMaxMul{Int64}(2)) == (TropicalMaxMul{Float64}(1), TropicalMaxMul{Float64}(2))
+    @test promote(TropicalMaxMul{Float64}(1)) == (TropicalMaxMul{Float64}(1),)
+    @test promote_type(TropicalMaxMul{Float64}, TropicalMaxMulF32) == TropicalMaxMulF64
+    @test promote_type(TropicalMaxMul{Float64}, TropicalMaxMulF32, TropicalMaxMul{Int32}) == TropicalMaxMulF64
 
-    @test Tropical(3) / Tropical(4) == Tropical(-1)
-    @test Tropical(3) ÷ Tropical(4) == Tropical(-1)
-    @test inv(Tropical(3)) == Tropical(-3)
+    @test TropicalMaxMul(3) / TropicalMaxMul(4) == TropicalMaxMul(3 / 4)
+    @test TropicalMaxMul(3) ÷ TropicalMaxMul(4) == TropicalMaxMul(3 ÷ 4)
+    @test inv(TropicalMaxMul(3)) == TropicalMaxMul(1/3)
 
-    x = Tropical(2.0)
+    x = TropicalMaxMul(2.0)
     @test x * true == x * one(x)
     @test x / true == x / one(x)
     @test x ÷ true == x ÷ one(x)
     @test x * false == x * zero(x)
     @test x / false == x / zero(x)
-    @test x ÷ false == x ÷ zero(x)
+    # @test x ÷ false == x / zero(x)
+    @test isnan(x ÷ false)
     @test true * x == one(x) * x
     @test true / x == one(x) / x
     @test true ÷ x == one(x) ÷ x
     @test false * x == zero(x) * x
     @test false / x == zero(x) / x
     @test false ÷ x == zero(x) ÷ x
-    @test isnan(Tropical(NaN))
-    @test !isnan(Tropical(-Inf))
+    @test isnan(TropicalMaxMul(NaN))
+    @test !isnan(TropicalMaxMul(Inf))
 
-    @test Tropical(2.0) ^ 3.0 == Tropical(2.0) * Tropical(2.0) * Tropical(2.0)
-    @test Tropical(2.0) ^ 3 == Tropical(2.0) * Tropical(2.0) * Tropical(2.0)
+    @test TropicalMaxMul(2.0) ^ 3.0 == TropicalMaxMul(2.0) * TropicalMaxMul(2.0) * TropicalMaxMul(2.0)
+    @test TropicalMaxMul(2.0) ^ 3 == TropicalMaxMul(2.0) * TropicalMaxMul(2.0) * TropicalMaxMul(2.0)
 end

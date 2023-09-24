@@ -1,11 +1,14 @@
-export Tropical, TropicalF64, TropicalF32, TropicalF16, content
+export Tropical, TropicalF64, TropicalF32, TropicalF16, content, neginf, posinf
 
+# define the neginf and posinf
 neginf(::Type{T}) where T = typemin(T)
 neginf(::Type{T}) where T<:AbstractFloat = typemin(T)
 neginf(::Type{T}) where T<:Rational = typemin(T)
 neginf(::Type{T}) where T<:Integer = T(-999999)
 neginf(::Type{Int16}) = Int16(-16384)
 neginf(::Type{Int8}) = Int8(-64)
+
+posinf(::Type{T}) where T = - neginf(T)
 
 """
     Tropical{T} <: Number
