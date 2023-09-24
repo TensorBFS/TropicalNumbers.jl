@@ -31,19 +31,15 @@ julia> zero(TropicalMaxMulF64)
 struct TropicalMaxMul{T} <: AbstractSemiring
     n::T
     function TropicalMaxMul{T}(x) where T 
-        @assert x >= 0 || isnan(x)
         new{T}(T(x))
     end
     function TropicalMaxMul(x::T) where T
-        @assert x >= 0 || isnan(x)
         new{T}(x)
     end
     function TropicalMaxMul{T}(x::TropicalMaxMul{T}) where T
-        @assert x.n >= 0 || isnan(x)
         x
     end
     function TropicalMaxMul{T1}(x::TropicalMaxMul{T2}) where {T1,T2}
-        @assert x.n >= 0 || isnan(x)
         new{T1}(T2(x.n))
     end
 end
