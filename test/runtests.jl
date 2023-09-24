@@ -6,6 +6,7 @@ using Test, Documenter
     include("tropical_andor.jl")
     include("tropical_maxmul.jl")
     include("tropical_minplus.jl")
+    include("tropical_maxplus.jl")
 end
 
 @testset "counting_tropical" begin

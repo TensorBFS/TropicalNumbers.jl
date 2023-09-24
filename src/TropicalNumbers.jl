@@ -1,11 +1,14 @@
 module TropicalNumbers
 
-export Tropical, TropicalF64, TropicalF32, TropicalF16, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64, content, TropicalAndOr
-export CountingTropical
+export Tropical, TropicalF64, TropicalF32, TropicalF16, content, TropicalAndOr
+export TropicalMaxMul, TropicalMaxMulF64, TropicalMaxMulF32, TropicalMaxMulF16
+export TropicalMaxPlus, TropicalMaxPlusF64, TropicalMaxPlusF32, TropicalMaxPlusF16
+export TropicalMinPlus, TropicalMinPlusF64, TropicalMinPlusF32, TropicalMinPlusF16
+export CountingTropical, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64
 export TropicalTypes
 
 
-include("tropical.jl")
+include("tropical_maxplus.jl")
 include("tropical_andor.jl")
 include("tropical_minplus.jl")
 include("tropical_maxmul.jl")
@@ -61,5 +64,10 @@ for T in [:Tropical, :TropicalMaxMul, :TropicalMinPlus, :CountingTropical]
         Base.div(b::Bool, a::$T) = b ? one(a) ÷ a : zero(a)
     end
 end
+
+const TropicalMaxPlus = Tropical
+const TropicalMaxPlusF16 = TropicalF16
+const TropicalMaxPlusF32 = TropicalF32
+const TropicalMaxPlusF64 = TropicalF64
 
 end # module

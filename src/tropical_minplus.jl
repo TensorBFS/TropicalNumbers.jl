@@ -3,7 +3,7 @@ export TropicalMinPlus, TropicalMinPlusF64, TropicalMinPlusF32, TropicalMinPlusF
 """
     TropicalMinPlus{T} <: Number
     
-TropicalMinPlus is a semiring algebra that maps
+TropicalMinPlus is a semiring algebra defined on R ∪ {+∞}, and maps
 
 * `+` to `min` in regular algebra,
 * `*` to `+` in regular algebra,

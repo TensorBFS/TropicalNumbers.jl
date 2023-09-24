@@ -1,4 +1,5 @@
-export Tropical, TropicalF64, TropicalF32, TropicalF16, content, neginf, posinf
+export Tropical, TropicalF64, TropicalF32, TropicalF16
+export content, neginf, posinf
 
 # define the neginf and posinf
 neginf(::Type{T}) where T = typemin(T)
@@ -51,6 +52,7 @@ struct Tropical{T} <: Number
         new{T1}(T2(x.n))
     end
 end
+
 
 Base.show(io::IO, t::Tropical) = Base.print(io, "$(t.n)ₜ")
 
