@@ -1,49 +1,53 @@
 using Test
 using TropicalNumbers
 
-@testset "TropicalMaxPlus" begin
-    @test TropicalMaxPlus(3) * TropicalMaxPlus(4) == TropicalMaxPlus(7)
-    @test TropicalMaxPlus(3) + TropicalMaxPlus(4) == TropicalMaxPlus(4)
-    @test TropicalMaxPlus(4) + TropicalMaxPlus(-1) == TropicalMaxPlus(4)
-    @test zero(TropicalMaxPlus(2)).n .< -99999
-    @test zero(TropicalMaxPlus(2.0)) == TropicalMaxPlus(-Inf)
-    @test one(TropicalMaxPlus(2)) == TropicalMaxPlus(0)
-    @test TropicalMaxPlus(2.0) ≈ TropicalMaxPlus(2.0 + 1e-10)
-    @test TropicalMaxPlus(2) ≈ TropicalMaxPlus(2.0)
-    @test TropicalMaxPlusF32(2.0).n isa Float32
-    @test TropicalMaxPlusF16(2.0).n isa Float16
-    @test TropicalMaxPlusF64(2.0).n isa Float64
+@testset "tropical" begin
+    @test Tropical == TropicalMaxPlus
+    @test TropicalF16 == TropicalMaxPlusF16
+    @test TropicalF32 == TropicalMaxPlusF32
+    @test TropicalF64 == TropicalMaxPlusF64
+    @test Tropical(3) * Tropical(4) == Tropical(7)
+    @test Tropical(3) + Tropical(4) == Tropical(4)
+    @test Tropical(4) + Tropical(-1) == Tropical(4)
+    @test zero(Tropical(2)).n .< -99999
+    @test zero(Tropical(2.0)) == Tropical(-Inf)
+    @test one(Tropical(2)) == Tropical(0)
+    @test Tropical(2.0) ≈ Tropical(2.0 + 1e-10)
+    @test Tropical(2) ≈ Tropical(2.0)
+    @test TropicalF32(2.0).n isa Float32
+    @test TropicalF16(2.0).n isa Float16
+    @test TropicalF64(2.0).n isa Float64
 
-    @test TropicalMaxPlus(0//3) * TropicalMaxPlus(1//3) == TropicalMaxPlus(1//3)
-    @test TropicalMaxPlus(1//3) * TropicalMaxPlus(0//3) == TropicalMaxPlus(1//3)
-    @test TropicalMaxPlus(1//3) * TropicalMaxPlus(1//3) == TropicalMaxPlus(2//3)
+    @test Tropical(0//3) * Tropical(1//3) == Tropical(1//3)
+    @test Tropical(1//3) * Tropical(0//3) == Tropical(1//3)
+    @test Tropical(1//3) * Tropical(1//3) == Tropical(2//3)
 
-    @test TropicalMaxPlus(1//3) * TropicalMaxPlus(1//0) == TropicalMaxPlus(1//0)
-    @test TropicalMaxPlus(1//3) * TropicalMaxPlus(-1//0) == TropicalMaxPlus(-1//0)
-    @test TropicalMaxPlus(1//0) * TropicalMaxPlus(1//1) == TropicalMaxPlus(1//0)
-    @test TropicalMaxPlus(-1//0) * TropicalMaxPlus(-1//1) == TropicalMaxPlus(-1//0)
-    @test content(TropicalMaxPlus(3.0)) == 3.0
-    @test TropicalMaxPlus{Float32}(TropicalMaxPlus(0.0)) isa TropicalMaxPlus{Float32}
-    println(TropicalMaxPlusF64(3))
+    @test Tropical(1//3) * Tropical(1//0) == Tropical(1//0)
+    @test Tropical(1//3) * Tropical(-1//0) == Tropical(-1//0)
+    @test Tropical(1//0) * Tropical(1//1) == Tropical(1//0)
+    @test Tropical(-1//0) * Tropical(-1//1) == Tropical(-1//0)
+    @test content(Tropical(3.0)) == 3.0
+    @test Tropical{Float32}(Tropical(0.0)) isa Tropical{Float32}
+    println(TropicalF64(3))
 
     # promote and convert
-    t1 = TropicalMaxPlus(2)
-    t2 = TropicalMaxPlus(2.0)
-    @test TropicalMaxPlusF64(t1) === TropicalMaxPlus(2.0)
-    @test promote(t1, t2) === (TropicalMaxPlus(2.0), t2)
+    t1 = Tropical(2)
+    t2 = Tropical(2.0)
+    @test TropicalF64(t1) === Tropical(2.0)
+    @test promote(t1, t2) === (Tropical(2.0), t2)
 
-    @test content(TropicalMaxPlusF64) == Float64
+    @test content(TropicalF64) == Float64
 
-    @test promote(TropicalMaxPlus{Float64}(1), TropicalMaxPlus{Int64}(2)) == (TropicalMaxPlus{Float64}(1), TropicalMaxPlus{Float64}(2))
-    @test promote(TropicalMaxPlus{Float64}(1)) == (TropicalMaxPlus{Float64}(1),)
-    @test promote_type(TropicalMaxPlus{Float64}, TropicalMaxPlusF32) == TropicalMaxPlusF64
-    @test promote_type(TropicalMaxPlus{Float64}, TropicalMaxPlusF32, TropicalMaxPlus{Int32}) == TropicalMaxPlusF64
+    @test promote(Tropical{Float64}(1), Tropical{Int64}(2)) == (Tropical{Float64}(1), Tropical{Float64}(2))
+    @test promote(Tropical{Float64}(1)) == (Tropical{Float64}(1),)
+    @test promote_type(Tropical{Float64}, TropicalF32) == TropicalF64
+    @test promote_type(Tropical{Float64}, TropicalF32, Tropical{Int32}) == TropicalF64
 
-    @test TropicalMaxPlus(3) / TropicalMaxPlus(4) == TropicalMaxPlus(-1)
-    @test TropicalMaxPlus(3) ÷ TropicalMaxPlus(4) == TropicalMaxPlus(-1)
-    @test inv(TropicalMaxPlus(3)) == TropicalMaxPlus(-3)
+    @test Tropical(3) / Tropical(4) == Tropical(-1)
+    @test Tropical(3) ÷ Tropical(4) == Tropical(-1)
+    @test inv(Tropical(3)) == Tropical(-3)
 
-    x = TropicalMaxPlus(2.0)
+    x = Tropical(2.0)
     @test x * true == x * one(x)
     @test x / true == x / one(x)
     @test x ÷ true == x ÷ one(x)
@@ -56,9 +60,9 @@ using TropicalNumbers
     @test false * x == zero(x) * x
     @test false / x == zero(x) / x
     @test false ÷ x == zero(x) ÷ x
-    @test isnan(TropicalMaxPlus(NaN))
-    @test !isnan(TropicalMaxPlus(-Inf))
+    @test isnan(Tropical(NaN))
+    @test !isnan(Tropical(-Inf))
 
-    @test TropicalMaxPlus(2.0) ^ 3.0 == TropicalMaxPlus(2.0) * TropicalMaxPlus(2.0) * TropicalMaxPlus(2.0)
-    @test TropicalMaxPlus(2.0) ^ 3 == TropicalMaxPlus(2.0) * TropicalMaxPlus(2.0) * TropicalMaxPlus(2.0)
+    @test Tropical(2.0) ^ 3.0 == Tropical(2.0) * Tropical(2.0) * Tropical(2.0)
+    @test Tropical(2.0) ^ 3 == Tropical(2.0) * Tropical(2.0) * Tropical(2.0)
 end

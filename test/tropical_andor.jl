@@ -17,4 +17,6 @@ using TropicalNumbers
 
     @test zero(TropicalAndOr) == TropicalAndOr(false)
     @test one(TropicalAndOr) == TropicalAndOr(true)
+
+    println(TropicalAndOr(true))
 end

@@ -1,12 +1,40 @@
 module TropicalNumbers
 
-export Tropical, TropicalF64, TropicalF32, TropicalF16, content, TropicalAndOr
+export content, neginf, posinf
+export TropicalTypes, AbstractSemiring
+
+export TropicalAndOr
+export Tropical, TropicalF64, TropicalF32, TropicalF16
 export TropicalMaxMul, TropicalMaxMulF64, TropicalMaxMulF32, TropicalMaxMulF16
 export TropicalMaxPlus, TropicalMaxPlusF64, TropicalMaxPlusF32, TropicalMaxPlusF16
 export TropicalMinPlus, TropicalMinPlusF64, TropicalMinPlusF32, TropicalMinPlusF16
-export CountingTropical, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64
-export TropicalTypes
 
+
+"""
+    AbstractSemiring <: Number
+
+A [`Semiring`](https://en.wikipedia.org/wiki/Semiring) is a set R equipped with two binary operations + and ⋅, called addition and multiplication, such that:
+
+* (R, +) is a monoid with identity element called 0;
+* (R, ⋅) is a monoid with identity element called 1;
+* Addition is commutative;
+* Multiplication by the additive identity 0 annihilates ;
+* Multiplication left- and right-distributes over addition;
+* Explicitly stated, (R, +) is a commutative monoid.
+
+[`Tropical number`](https://en.wikipedia.org/wiki/Tropical_geometry) are a set of semiring algebras, described as 
+* (R, +, ⋅, 0, 1).
+where R is the set, + and ⋅ are the opeartions and 0, 1 are their identity element, respectively.
+
+In this package, the following tropical algebras are implemented:
+* TropicalAndOr, ([T, F], or, and, false, true);
+* Tropical (TropicalMaxPlus), (ℝ, max, +, -Inf, 0);
+* TropicalMinPlus, (ℝ, min, +, Inf, 0);
+* TropicalMaxMul, (ℝ⁺, max, ⋅, 0, 1).
+
+We implemented fast tropical matrix multiplication in [`TropicalGEMM`](https://github.com/TensorBFS/TropicalGEMM.jl/) and [`CuTropicalGEMM`](https://github.com/ArrogantGao/CuTropicalGEMM.jl/).
+"""
+abstract type AbstractSemiring <: Number end
 
 include("tropical_maxplus.jl")
 include("tropical_andor.jl")
@@ -15,13 +43,15 @@ include("tropical_maxmul.jl")
 include("counting_tropical.jl")
 
 const TropicalTypes{T} = Union{CountingTropical{T}, Tropical{T}}
+const TropicalMaxPlus = Tropical
 
 # alias
 # defining constants like `TropicalF64`.
 for NBIT in [16, 32, 64]
     @eval const $(Symbol(:Tropical, :F, NBIT)) = Tropical{$(Symbol(:Float, NBIT))}
-    @eval const $(Symbol(:TropicalMaxMul, :F, NBIT)) = TropicalMaxMul{$(Symbol(:Float, NBIT))}
+    @eval const $(Symbol(:TropicalMaxPlus, :F, NBIT)) = TropicalMaxPlus{$(Symbol(:Float, NBIT))}
     @eval const $(Symbol(:TropicalMinPlus, :F, NBIT)) = TropicalMinPlus{$(Symbol(:Float, NBIT))}
+    @eval const $(Symbol(:TropicalMaxMul, :F, NBIT)) = TropicalMaxMul{$(Symbol(:Float, NBIT))}
     @eval const $(Symbol(:CountingTropical, :F, NBIT)) = CountingTropical{$(Symbol(:Float, NBIT)),$(Symbol(:Float, NBIT))}
 end
 
@@ -58,16 +88,9 @@ for T in [:Tropical, :TropicalMaxMul, :TropicalMinPlus, :CountingTropical]
         Base.:(*)(b::Bool, a::$T) = b ? a : zero(a)
         Base.:(/)(a::$T, b::Bool) = b ? a : a / zero(a)
         Base.:(/)(b::Bool, a::$T) = b ? inv(a) : zero(a)
-        # Base.div(a::$T, b::Bool) = b ? a : a / zero(a)
-        # Base.div(b::Bool, a::$T) = b ? inv(a) : zero(a)
         Base.div(a::$T, b::Bool) = b ? a : a ÷ zero(a)
         Base.div(b::Bool, a::$T) = b ? one(a) ÷ a : zero(a)
     end
 end
-
-const TropicalMaxPlus = Tropical
-const TropicalMaxPlusF16 = TropicalF16
-const TropicalMaxPlusF32 = TropicalF32
-const TropicalMaxPlusF64 = TropicalF64
 
 end # module

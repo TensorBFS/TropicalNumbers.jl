@@ -1,5 +1,6 @@
-export Tropical, TropicalF64, TropicalF32, TropicalF16
-export content, neginf, posinf
+# export Tropical, TropicalF64, TropicalF32, TropicalF16
+# export TropicalMaxPlus, TropicalMaxPlusF64, TropicalMaxPlusF32, TropicalMaxPlusF16
+# export neginf, posinf
 
 # define the neginf and posinf
 neginf(::Type{T}) where T = typemin(T)
@@ -8,38 +9,37 @@ neginf(::Type{T}) where T<:Rational = typemin(T)
 neginf(::Type{T}) where T<:Integer = T(-999999)
 neginf(::Type{Int16}) = Int16(-16384)
 neginf(::Type{Int8}) = Int8(-64)
-
 posinf(::Type{T}) where T = - neginf(T)
 
 """
-    Tropical{T} <: Number
-    
-[Tropical number](https://en.wikipedia.org/wiki/Tropical_geometry) is a semiring algebra that maps
+    TropicalMaxPlus{T} = Tropical{T} <: AbstractSemiring
 
+TropicalMaxPlus is a semiring algebra, can be described by
+* Tropical (TropicalMaxPlus), (ℝ, max, +, -Inf, 0).
+
+It maps
 * `+` to `max` in regular algebra,
 * `*` to `+` in regular algebra,
 * `1` to `0` in regular algebra,
-* `0` to `-Inf` in regular algebra (for integer content types, this is chosen as a mall integer).
-
-We implemented fast tropical matrix multiplication in [`TropicalGEMM`](https://github.com/TensorBFS/TropicalGEMM.jl/).
+* `0` to `-Inf` in regular algebra (for integer content types, this is chosen as a small integer).
 
 Example
 -------------------------
 ```jldoctest; setup=:(using TropicalNumbers)
-julia> Tropical(1.0) + Tropical(3.0)
+julia> TropicalMaxPlus(1.0) + TropicalMaxPlus(3.0)
 3.0ₜ
 
-julia> Tropical(1.0) * Tropical(3.0)
+julia> TropicalMaxPlus(1.0) * TropicalMaxPlus(3.0)
 4.0ₜ
 
-julia> one(TropicalF64)
+julia> one(TropicalMaxPlusF64)
 0.0ₜ
 
-julia> zero(TropicalF64)
+julia> zero(TropicalMaxPlusF64)
 -Infₜ
 ```
 """
-struct Tropical{T} <: Number
+struct Tropical{T} <: AbstractSemiring
     n::T
     Tropical{T}(x) where T = new{T}(T(x))
     function Tropical(x::T) where T
