@@ -38,8 +38,8 @@ julia> TropicalMaxMul(3) * TropicalMaxMul(4)
 TropicalMaxMul(12)
 ```
 > Warnings
-    1. `TropicalMaxPlus` is an alias of `Tropical`.
-    2. `TropicalMaxMul` should not contain negative numbers. However, this package does not check the data validity. Not only for performance reason, but also for future GPU support.
+> 1. `TropicalMaxPlus` is an alias of `Tropical`.
+> 2. `TropicalMaxMul` should not contain negative numbers. However, this package does not check the data validity. Not only for performance reason, but also for future GPU support.
 
 ## Why another tropical number?
 
