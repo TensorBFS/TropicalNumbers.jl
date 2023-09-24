@@ -8,6 +8,7 @@ export Tropical, TropicalF64, TropicalF32, TropicalF16
 export TropicalMaxMul, TropicalMaxMulF64, TropicalMaxMulF32, TropicalMaxMulF16
 export TropicalMaxPlus, TropicalMaxPlusF64, TropicalMaxPlusF32, TropicalMaxPlusF16
 export TropicalMinPlus, TropicalMinPlusF64, TropicalMinPlusF32, TropicalMinPlusF16
+export CountingTropical, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64
 
 
 """

@@ -1,7 +1,3 @@
-# export Tropical, TropicalF64, TropicalF32, TropicalF16
-# export TropicalMaxPlus, TropicalMaxPlusF64, TropicalMaxPlusF32, TropicalMaxPlusF16
-# export neginf, posinf
-
 # define the neginf and posinf
 neginf(::Type{T}) where T = typemin(T)
 neginf(::Type{T}) where T<:AbstractFloat = typemin(T)

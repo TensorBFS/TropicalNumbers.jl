@@ -1,5 +1,3 @@
-export CountingTropical, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64
-
 """
     CountingTropical{T,CT} <: Number
 
