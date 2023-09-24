@@ -37,7 +37,7 @@ Tropical(7)
 julia> TropicalMaxMul(3) * TropicalMaxMul(4)
 TropicalMaxMul(12)
 ```
-!!! note
+> Warnings
     1. `TropicalMaxPlus` is an alias of `Tropical`.
     2. `TropicalMaxMul` should not contain negative numbers. However, this package does not check the data validity. Not only for performance reason, but also for future GPU support.
 
@@ -51,5 +51,5 @@ Related packages include
 These packages include unnecessary fields in its tropical numbers, such as `isinf`. However, `Inf` and `-Inf` can be used directly for floating point numbers, which is more memory efficient and computationally cheap. `TropicalNumbers` is designed for high performance matrix multiplication on both CPU and GPU.
 
 ## Ecosystem
-* [TropicalGEMM](https://github.com/TensorBFS/TropicalGEMM.jl): The BLAS package for tropical numbers.
-* [CuTropicalGEMM](https://github.com/ArrogantGao/CuTropicalGEMM.jl), The GPU version of TropicalGEMM.
+* [TropicalGEMM.jl](https://github.com/TensorBFS/TropicalGEMM.jl): The BLAS package for tropical numbers.
+* [CuTropicalGEMM.jl](https://github.com/ArrogantGao/CuTropicalGEMM.jl), The GPU version of TropicalGEMM.
