@@ -1,7 +1,7 @@
 name = "TropicalNumbers"
 uuid = "b3a74e9c-7526-4576-a4eb-79c0d4c32334"
 authors = ["GiggleLiu"]
-version = "0.5.5"
+version = "0.6.0"
 
 [compat]
 julia = "1"
