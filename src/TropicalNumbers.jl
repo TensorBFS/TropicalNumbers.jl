@@ -4,11 +4,11 @@ export content, neginf, posinf
 export TropicalTypes, AbstractSemiring
 
 export TropicalAndOr
-export Tropical, TropicalF64, TropicalF32, TropicalF16
-export TropicalMaxMul, TropicalMaxMulF64, TropicalMaxMulF32, TropicalMaxMulF16
-export TropicalMaxPlus, TropicalMaxPlusF64, TropicalMaxPlusF32, TropicalMaxPlusF16
-export TropicalMinPlus, TropicalMinPlusF64, TropicalMinPlusF32, TropicalMinPlusF16
-export CountingTropical, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64
+export Tropical, TropicalF64, TropicalF32, TropicalF16, TropicalI64, TropicalI32, TropicalI16
+export TropicalMaxMul, TropicalMaxMulF64, TropicalMaxMulF32, TropicalMaxMulF16, TropicalMaxMulI64, TropicalMaxMulI32, TropicalMaxMulI16
+export TropicalMaxPlus, TropicalMaxPlusF64, TropicalMaxPlusF32, TropicalMaxPlusF16, TropicalMaxPlusI64, TropicalMaxPlusI32, TropicalMaxPlusI16
+export TropicalMinPlus, TropicalMinPlusF64, TropicalMinPlusF32, TropicalMinPlusF16, TropicalMinPlusI64, TropicalMinPlusI32, TropicalMinPlusI16
+export CountingTropical, CountingTropicalF16, CountingTropicalF32, CountingTropicalF64, CountingTropicalI16, CountingTropicalI32, CountingTropicalI64
 
 
 """
@@ -54,6 +54,12 @@ for NBIT in [16, 32, 64]
     @eval const $(Symbol(:TropicalMinPlus, :F, NBIT)) = TropicalMinPlus{$(Symbol(:Float, NBIT))}
     @eval const $(Symbol(:TropicalMaxMul, :F, NBIT)) = TropicalMaxMul{$(Symbol(:Float, NBIT))}
     @eval const $(Symbol(:CountingTropical, :F, NBIT)) = CountingTropical{$(Symbol(:Float, NBIT)),$(Symbol(:Float, NBIT))}
+
+    @eval const $(Symbol(:Tropical, :I, NBIT)) = Tropical{$(Symbol(:Int, NBIT))}
+    @eval const $(Symbol(:TropicalMaxPlus, :I, NBIT)) = TropicalMaxPlus{$(Symbol(:Int, NBIT))}
+    @eval const $(Symbol(:TropicalMinPlus, :I, NBIT)) = TropicalMinPlus{$(Symbol(:Int, NBIT))}
+    @eval const $(Symbol(:TropicalMaxMul, :I, NBIT)) = TropicalMaxMul{$(Symbol(:Int, NBIT))}
+    @eval const $(Symbol(:CountingTropical, :I, NBIT)) = CountingTropical{$(Symbol(:Int, NBIT)),$(Symbol(:Float, NBIT))}
 end
 
 # alias

@@ -13,6 +13,9 @@ using TropicalNumbers
     @test TropicalMinPlusF32(2.0).n isa Float32
     @test TropicalMinPlusF16(2.0).n isa Float16
     @test TropicalMinPlusF64(2.0).n isa Float64
+    @test TropicalMinPlusI32(2).n isa Int32
+    @test TropicalMinPlusI16(2).n isa Int16
+    @test TropicalMinPlusI64(2).n isa Int64
 
     @test TropicalMinPlus(0//3) * TropicalMinPlus(1//3) == TropicalMinPlus(1//3)
     @test TropicalMinPlus(1//3) * TropicalMinPlus(0//3) == TropicalMinPlus(1//3)
