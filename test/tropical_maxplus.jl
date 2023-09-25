@@ -6,6 +6,9 @@ using TropicalNumbers
     @test TropicalF16 == TropicalMaxPlusF16
     @test TropicalF32 == TropicalMaxPlusF32
     @test TropicalF64 == TropicalMaxPlusF64
+    @test TropicalI16 == TropicalMaxPlusI16
+    @test TropicalI32 == TropicalMaxPlusI32
+    @test TropicalI64 == TropicalMaxPlusI64
     @test Tropical(3) * Tropical(4) == Tropical(7)
     @test Tropical(3) + Tropical(4) == Tropical(4)
     @test Tropical(4) + Tropical(-1) == Tropical(4)
@@ -17,6 +20,9 @@ using TropicalNumbers
     @test TropicalF32(2.0).n isa Float32
     @test TropicalF16(2.0).n isa Float16
     @test TropicalF64(2.0).n isa Float64
+    @test TropicalI32(2).n isa Int32
+    @test TropicalI16(2).n isa Int16
+    @test TropicalI64(2).n isa Int64
 
     @test Tropical(0//3) * Tropical(1//3) == Tropical(1//3)
     @test Tropical(1//3) * Tropical(0//3) == Tropical(1//3)

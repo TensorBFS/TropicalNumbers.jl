@@ -13,6 +13,9 @@ using TropicalNumbers
     @test TropicalMaxMulF32(2.0).n isa Float32
     @test TropicalMaxMulF16(2.0).n isa Float16
     @test TropicalMaxMulF64(2.0).n isa Float64
+    @test TropicalMaxMulI32(2).n isa Int32
+    @test TropicalMaxMulI16(2).n isa Int16
+    @test TropicalMaxMulI64(2).n isa Int64
 
     @test TropicalMaxMul(0//3) * TropicalMaxMul(1//3) == TropicalMaxMul(0//9)
     @test TropicalMaxMul(1//3) * TropicalMaxMul(0//3) == TropicalMaxMul(0//9)
