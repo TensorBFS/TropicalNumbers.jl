@@ -50,4 +50,4 @@ Base.one(::TropicalAndOr) = one(TropicalAndOr)
 Base.inv(x::TropicalAndOr) = TropicalAndOr(!x.n)
 
 # bool type only have two values
-Base.isapprox(x::TropicalAndOr, y::TropicalAndOr; kwargs...) = ispprox(x.n, y.n; kwargs...)
+Base.isapprox(x::TropicalAndOr, y::TropicalAndOr; kwargs...) = isapprox(x.n, y.n; kwargs...)
