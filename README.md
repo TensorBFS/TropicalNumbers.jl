@@ -1,6 +1,6 @@
 # TropicalNumbers
 
-[![Build Status](https://travis-ci.com/TensorBFS/TropicalNumbers.jl.svg?branch=master)](https://travis-ci.com/TensorBFS/TropicalNumbers.jl)
+[![CI](https://github.com/TensorBFS/TropicalNumbers.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/TensorBFS/TropicalNumbers.jl/actions/workflows/ci.yml)
 [![Codecov](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl)
 
 This package implements [tropical numbers](https://en.wikipedia.org/wiki/Tropical_geometry) and tropical algebras in Julia. Tropical algebra is also known as the [semiring](https://en.wikipedia.org/wiki/Semiring) algebra, which is a set $R$ equipped with two binary operations $\oplus$ and $\otimes$, called addition and multiplication, such that:
