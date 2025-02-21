@@ -1,5 +1,8 @@
 # TropicalNumbers
 
+[![Build Status](https://travis-ci.com/TensorBFS/TropicalNumbers.jl.svg?branch=master)](https://travis-ci.com/TensorBFS/TropicalNumbers.jl)
+[![Codecov](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl)
+
 This package implements [tropical numbers](https://en.wikipedia.org/wiki/Tropical_geometry) and tropical algebras in Julia. Tropical algebra is also known as the [semiring](https://en.wikipedia.org/wiki/Semiring) algebra, which is a set $R$ equipped with two binary operations $\oplus$ and $\otimes$, called addition and multiplication, such that:
 
 * $(R, \oplus)$ is a monoid with identity element called $\mathbb{0}$;
@@ -8,10 +11,6 @@ This package implements [tropical numbers](https://en.wikipedia.org/wiki/Tropica
 * Multiplication by the additive identity $\mathbb{0}$ annihilates ;
 * Multiplication left- and right-distributes over addition;
 * Explicitly stated, $(R, \oplus)$ is a commutative monoid.
-
-
-[![Build Status](https://travis-ci.com/TensorBFS/TropicalNumbers.jl.svg?branch=master)](https://travis-ci.com/TensorBFS/TropicalNumbers.jl)
-[![Codecov](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/TensorBFS/TropicalNumbers.jl)
 
 ## Installation
 To install this package, press `]` in Julia REPL to enter package mode, then type
