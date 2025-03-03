@@ -73,4 +73,4 @@ Base.div(x::TropicalMinPlus, y::TropicalMinPlus) = TropicalMinPlus(x.n - y.n)
 Base.isapprox(x::TropicalMinPlus, y::TropicalMinPlus; kwargs...) = isapprox(x.n, y.n; kwargs...)
 
 # promotion rules
-Base.promote_type(::Type{TropicalMinPlus{T1}}, b::Type{TropicalMinPlus{T2}}) where {T1, T2} = TropicalMinPlus{promote_type(T1,T2)}
+Base.promote_rule(::Type{TropicalMinPlus{T1}}, b::Type{TropicalMinPlus{T2}}) where {T1, T2} = TropicalMinPlus{promote_type(T1,T2)}
