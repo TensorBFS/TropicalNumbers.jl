@@ -62,4 +62,4 @@ Base.isapprox(a::CountingTropical, b::CountingTropical; kwargs...) = isapprox(a.
 
 Base.show(io::IO, t::CountingTropical) = Base.print(io, "$((t.n, t.c))ₜ")
 
-Base.promote_type(::Type{CountingTropical{T1,CT1}}, b::Type{CountingTropical{T2,CT2}}) where {T1,T2,CT1,CT2} = CountingTropical{promote_type(T1,T2), promote_type(CT1,CT2)}
+Base.promote_rule(::Type{CountingTropical{T1,CT1}}, b::Type{CountingTropical{T2,CT2}}) where {T1,T2,CT1,CT2} = CountingTropical{promote_type(T1,T2), promote_type(CT1,CT2)}

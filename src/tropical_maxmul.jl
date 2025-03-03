@@ -67,4 +67,4 @@ Base.div(x::TropicalMaxMul, y::TropicalMaxMul) = TropicalMaxMul(x.n ÷ y.n)
 Base.isapprox(x::TropicalMaxMul, y::TropicalMaxMul; kwargs...) = isapprox(x.n, y.n; kwargs...)
 
 # promotion rules
-Base.promote_type(::Type{TropicalMaxMul{T1}}, b::Type{TropicalMaxMul{T2}}) where {T1, T2} = TropicalMaxMul{promote_type(T1,T2)}
+Base.promote_rule(::Type{TropicalMaxMul{T1}}, b::Type{TropicalMaxMul{T2}}) where {T1, T2} = TropicalMaxMul{promote_type(T1,T2)}
