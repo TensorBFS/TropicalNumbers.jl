@@ -64,4 +64,6 @@ using TropicalNumbers
 
     @test TropicalMinPlus(2.0) ^ 3.0 == TropicalMinPlus(2.0) * TropicalMinPlus(2.0) * TropicalMinPlus(2.0)
     @test TropicalMinPlus(2.0) ^ 3 == TropicalMinPlus(2.0) * TropicalMinPlus(2.0) * TropicalMinPlus(2.0)
+
+    @test TropicalMinPlus(-Inf) > TropicalMinPlus(3.0) >= TropicalMinPlus(4.0) >= TropicalMinPlus(4.0)
 end

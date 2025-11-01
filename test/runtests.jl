@@ -17,6 +17,14 @@ end
     include("tropical_maxplus.jl")
 end
 
+@testset "tropical max min" begin
+    include("tropical_maxmin.jl")
+end
+
+@testset "tropical bitwise" begin
+    include("tropical_bitwise.jl")
+end
+
 @testset "counting_tropical" begin
     include("counting_tropical.jl")
 end
