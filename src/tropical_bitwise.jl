@@ -1,7 +1,8 @@
 """
     TropicalBitwise{T} <: AbstractSemiring
 
-TropicalBitwise is a semiring algebra, can be described by
+`TropicalBitwise` is a semiring algebra that parallelizes the [`TropicalAndOr`](@ref) algebra,
+It can be described by
 * TropicalBitwise, (ℝ, |, &, 0, ~0).
 
 It maps
