@@ -70,6 +70,31 @@ Base.inv(x::TropicalMinPlus) = TropicalMinPlus(-x.n)
 Base.:/(x::TropicalMinPlus, y::TropicalMinPlus) = TropicalMinPlus(x.n - y.n)
 Base.div(x::TropicalMinPlus, y::TropicalMinPlus) = TropicalMinPlus(x.n - y.n)
 
+# ordering
+function Base.:(==)(a::TropicalMinPlus, b::TropicalMinPlus)
+    return b.n == a.n
+end
+
+function Base.:>=(a::TropicalMinPlus, b::TropicalMinPlus)
+    return b.n >= a.n
+end
+
+function Base.:<=(a::TropicalMinPlus, b::TropicalMinPlus)
+    return b.n <= a.n
+end
+
+function Base.:<(a::TropicalMinPlus, b::TropicalMinPlus)
+    return b.n < a.n
+end
+
+function Base.:>(a::TropicalMinPlus, b::TropicalMinPlus)
+    return b.n > a.n
+end
+
+function Base.isless(a::TropicalMinPlus, b::TropicalMinPlus)
+    return isless(b.n, a.n)
+end
+
 Base.isapprox(x::TropicalMinPlus, y::TropicalMinPlus; kwargs...) = isapprox(x.n, y.n; kwargs...)
 
 # promotion rules

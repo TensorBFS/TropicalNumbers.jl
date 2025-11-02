@@ -12,6 +12,8 @@ It maps
 * `1` to `true` in regular algebra,
 * `0` to `false` in regular algebra.
 
+For the parallel bit-wise version, see [`TropicalBitwise`](@ref).
+
 Example
 -------------------------
 ```jldoctest; setup=:(using TropicalNumbers)
