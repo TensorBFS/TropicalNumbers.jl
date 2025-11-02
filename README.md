@@ -23,7 +23,7 @@ pkg> add TropicalNumbers
 
 A Topical algebra can be described as a tuple $(R, \oplus, \otimes, \mathbb{0}, \mathbb{1})$, where $R$ is the set, $\oplus$ and $\otimes$ are the opeartions and $\mathbb{0}$, $\mathbb{1}$ are their identity element, respectively. In this package, the following tropical algebras are implemented:
 * `TropicalAndOr`: $([T, F], \lor, \land, F, T)$;
-* `TropicalBitwise`: $(\mathbb{T}, |, \&, 0, \sim 0)$
+* `TropicalBitwise`: $(\mathbb{R}, |, \\&, 0, \sim 0)$
 * `Tropical` (`TropicalMaxPlus`): $(\mathbb{R}, \max, +, -\infty, 0)$;
 * `TropicalMinPlus`: $(\mathbb{R}, \min, +, \infty, 0)$;
 * `TropicalMaxMul`: $(\mathbb{R}^+, \max, \times, 0, 1)$.
